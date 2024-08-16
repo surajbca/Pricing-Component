@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Pricing from "./components/Pricing";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+      <header className="p-4 flex justify-between items-center">
+        <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+          My App
+        </h1>
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className="text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-800 p-2 rounded"
         >
-          Learn React
-        </a>
+          {darkMode ? "Light Mode" : "Dark Mode"}
+        </button>
       </header>
+      <main>
+        <Pricing />
+      </main>
     </div>
   );
 }
